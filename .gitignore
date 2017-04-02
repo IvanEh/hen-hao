@@ -1,0 +1,13 @@
+*.war
+*.ear
+*.class
+
+extensions/**/extensioninfo.xsd
+extensions/**/eclipsebin/
+extensions/**/classes/
+extensions/**/gensrc/
+extensions/**/build.xml
+extensions/**/resources/beans.xsd
+extensions/**/resources/items.xsd
+extensions/**/*-webtestclasses.xml
+extensions/**/*-testclasses.xml
