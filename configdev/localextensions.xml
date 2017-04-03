@@ -2,5 +2,12 @@
   <extensions>
     <path dir='${HYBRIS_BIN_DIR}' autoload='false' />
     <extension name='training' />
+	<extension name='trainingcockputs' />
+	<extension name='trainingcore' />
+	<extension name='trainingfacades' />
+	<extension name='trainingfulfilmentprocess' />
+	<extension name='traininginitialdata' />
+	<extension name='trainingstorefront' />
+	<extension name='trainingtest' />
   </extensions>
 </hybrisconfig>
