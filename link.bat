@@ -1,7 +1,7 @@
 @echo off
 
 SET CONFIG_TYPE=dev
-SET HYBRIS_DIR="D:\Workspace\Epam\hybris-suit"
+SET HYBRIS_DIR="D:\workspace\hyb"
 
 SET HYBRIS_CONFIG=%HYBRIS_DIR%\hybris\config
 SET HYBRIS_EXTENSIONS=%HYBRIS_DIR%\hybris\bin\custom

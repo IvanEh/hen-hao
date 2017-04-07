@@ -19,32 +19,50 @@
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
 
-	<itemtypes>
-<!--
-		<itemtype generate="true"
-		   code="MyProduct"
-		   jaloclass="com.epam.training.jalo.MyProduct"
-		   extends="Product"
-		   autocreate="true"
-	   >
+    <relations>
+		<relation code="Customer2Organisation" localized="false">
+            <deployment table="customer2orgranisation" typecode="10002"/>
+			<sourceElement type="Organisation" cardinality="many" qualifier="organisation"/>
+			<targetElement type="Customer" cardinality="many" qualifier="customer"/>
+		</relation>
+	</relations>
+
+    <itemtypes>
+        <itemtype code="Customer" generate="false" autocreate="false">
 			<attributes>
-				<attribute qualifier="myExampleInitialStringField" type="java.lang.String">
-					<description>My Example Initial String Value</description>
-					<modifiers initial="true"/>
+				<attribute qualifier="status" type="java.lang.Boolean">
+					<defaultvalue>false</defaultvalue>
 					<persistence type="property"/>
+					<modifiers read="true" write="false"/>
 				</attribute>
-
-				<attribute qualifier="myExampleBooleanField" type="java.lang.Boolean">
-					<description>Example Initial Boolean Field</description>
-               <persistence type="property"/>
+				<attribute qualifier="attemptCount" type="java.lang.Integer">
+					<defaultvalue>0</defaultvalue>
+                    <persistence type="property"/>
+					<modifiers read="true" write="false"/>
 				</attribute>
-
-				<attribute qualifier="media" type="Media">
-					<persistence type="property"/>
-				</attribute>
-
 			</attributes>
 		</itemtype>
--->
+        
+		<itemtype code="Organisation" generate="true" autocreate="true">
+            <deployment table="organisation" typecode="10001"/>
+			<attributes>
+				<attribute qualifier="id" type="java.lang.Integer" >
+					<persistence type="property"/>
+					<modifiers read="true" write="false" optional="false" initial="true"/>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers read="true" write="false" optional="false" initial="true"/>
+				</attribute>
+				<attribute qualifier="phone" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers read="true" write="false" optional="false" initial="true"/>
+				</attribute>
+				<attribute qualifier="email" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers read="true" write="false" optional="false" initial="true"/>
+				</attribute>
+			</attributes>
+		</itemtype>
 	</itemtypes>
 </items>
