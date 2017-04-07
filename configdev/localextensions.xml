@@ -2,7 +2,7 @@
   <extensions>
     <path dir='${HYBRIS_BIN_DIR}' autoload='false' />
     <extension name='training' />
-	<extension name='trainingcockputs' />
+	<extension name='trainingcockpits' />
 	<extension name='trainingcore' />
 	<extension name='trainingfacades' />
 	<extension name='trainingfulfilmentprocess' />
