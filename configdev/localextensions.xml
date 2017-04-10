@@ -9,5 +9,6 @@
 	<extension name='traininginitialdata' />
 	<extension name='trainingstorefront' />
 	<extension name='trainingtest' />
+	<extension name='hmc' />
   </extensions>
 </hybrisconfig>

@@ -23,7 +23,8 @@
       <coremodule generated="true" manager="com.epam.training.jalo.TrainingManager" packageroot="com.epam.training"/>
 
       <webmodule jspcompile="false" webroot="/training"/>
-					
+
+      <hmcmodule extensionclassname="com.epam.training.hmc.TrainingHMCExtension" sourceavailable="true"/>
 	
 
    </extension>

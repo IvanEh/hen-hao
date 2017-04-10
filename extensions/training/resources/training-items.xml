@@ -22,8 +22,8 @@
 	<relations>
 		<relation code="Customer2Organisation" localized="false">
 			<deployment table="customer2orgranisation" typecode="10002"/>
-			<sourceElement type="Organisation" cardinality="many" qualifier="organisation"/>
-			<targetElement type="Customer" cardinality="many" qualifier="customer"/>
+			<sourceElement type="Organisation" cardinality="many" qualifier="organisations"/>
+			<targetElement type="Customer" cardinality="many" qualifier="customers"/>
 		</relation>
 	</relations>
 
