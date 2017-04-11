@@ -15,15 +15,41 @@
 	xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
 
 
-	<!-- Configuration for extension trainingcore -->
-
-	<type name="Consignment" mode="append">
+	<explorertree >
+		<group name="user" mode="append">
+			<typeref type="Organisation"/>
+		</group>
+	</explorertree>
+	<type name="organisation" mode="append">
 		<organizer>
-			<editor mode="append">
-				<tab name="properties" position="0" mode="append">
-					<section name="consignment.details">
-						<listlayout mode="append">
-							 <action type="item" classname="com.epam.training.core.hmc.PickupConfirmationHMCAction" name="btn.consignment.confirm.pickup"/>
+			<search>
+				<condition attribute="name"/>
+				<condition attribute="id"/>
+			</search>
+			<result>
+				<listview>
+					<itemlayout>
+						<attribute name="id"/>
+						<attribute name="name"/>
+						<attribute name="email"/>
+						<attribute name="phone"/>
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<essentials>
+					<listlayout>
+						<attribute name="id"/>
+						<attribute name="name"/>
+						<attribute name="email"/>
+						<attribute name="phone"/>
+					</listlayout>
+				</essentials>
+				<tab name="tab.customers">
+					<section name="section.customers">
+						<listlayout>
+							<text name="label"/>
+							<attribute name="customers"/>
 						</listlayout>
 					</section>
 				</tab>

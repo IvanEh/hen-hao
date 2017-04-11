@@ -24,9 +24,6 @@
 
       <webmodule jspcompile="false" webroot="/training"/>
 
-      <hmcmodule extensionclassname="com.epam.training.hmc.TrainingHMCExtension" sourceavailable="true"/>
-	
-
    </extension>
       
 </extensioninfo>
