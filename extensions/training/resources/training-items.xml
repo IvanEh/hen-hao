@@ -52,15 +52,15 @@
 				</attribute>
 				<attribute qualifier="name" type="localized:java.lang.String">
 					<persistence type="property"/>
-					<modifiers read="true" write="false" optional="false" initial="true"/>
+					<modifiers read="true" write="true" optional="false" initial="true"/>
 				</attribute>
 				<attribute qualifier="phone" type="java.lang.String">
 					<persistence type="property"/>
-					<modifiers read="true" write="false" optional="false" initial="true"/>
+					<modifiers read="true" write="true" optional="false" initial="true"/>
 				</attribute>
 				<attribute qualifier="email" type="java.lang.String">
 					<persistence type="property"/>
-					<modifiers read="true" write="false" optional="false" initial="true"/>
+					<modifiers read="true" write="true" optional="false" initial="true"/>
 				</attribute>
 			</attributes>
 		</itemtype>
