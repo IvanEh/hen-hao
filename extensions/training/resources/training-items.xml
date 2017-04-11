@@ -62,6 +62,10 @@
 					<persistence type="property"/>
 					<modifiers read="true" write="true" optional="false" initial="true"/>
 				</attribute>
+				<attribute qualifier="customersNumber" type="java.lang.Integer">
+					<persistence type="dynamic" attributeHandler="customerNumberOrganisationAttributeHandler"/>
+					<modifiers read="true" write="false" initial="true"/>
+				</attribute>
 			</attributes>
 		</itemtype>
 	</itemtypes>

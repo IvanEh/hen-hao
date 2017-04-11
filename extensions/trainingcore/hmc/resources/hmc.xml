@@ -33,6 +33,7 @@
 						<attribute name="name"/>
 						<attribute name="email"/>
 						<attribute name="phone"/>
+						<attribute name="customersNumber"/>
 					</itemlayout>
 				</listview>
 			</result>
