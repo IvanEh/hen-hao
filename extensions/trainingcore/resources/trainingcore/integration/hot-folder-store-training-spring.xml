@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:file="http://www.springframework.org/schema/integration/file"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration 
+	http://www.springframework.org/schema/integration/spring-integration.xsd
+	http://www.springframework.org/schema/integration/file 
+	http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/> 
+
+	<bean id="baseDirectoryTraining" class="java.lang.String">
+		<constructor-arg value="#{baseDirectory}/${tenantId}/training" />
+	</bean>
+	<!-- 1) Scan for files -->
+	<file:inbound-channel-adapter id="batchFilesTraining" directory="#{baseDirectoryTraining}"
+		filename-regex="^(.*)-(\d+)\.csv" comparator="fileOrderComparator">
+		<int:poller fixed-rate="1000" />
+	</file:inbound-channel-adapter>
+	
+	<!-- 2) move the file to processing and create header -->
+	<file:outbound-gateway request-channel="batchFilesTraining" reply-channel="batchFilesTrainingProc"
+		directory="#{baseDirectoryTraining}/processing" delete-source-files="true" />
+	<int:service-activator input-channel="batchFilesTrainingProc" output-channel="batchFilesHeaderInit" ref="trainingHeaderSetupTask"
+		method="execute" />
+	<bean id="trainingHeaderSetupTask" class="de.hybris.platform.acceleratorservices.dataimport.batch.task.HeaderSetupTask">
+		<property name="catalog" value="apparelProductCatalog" />
+		<property name="net" value="false" />
+		<property name="storeBaseDirectory" ref="baseDirectoryApparel" />
+	</bean>
+	
+	<bean id="batchTrainingOrganisationConverterMapping"
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="organisation"
+		  p:converter-ref="batchTrainingOrganisationConverter"/>
+	
+	<bean id="batchTrainingOrganisationConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>
+				# Insert Organisation Products
+                INSERT_UPDATE Organisation;id[unique=true];email;name[lang=en];phone
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{1};{2};{3};{S}</value>
+		</property>
+	</bean>
+
+    <bean id="batchTrainingCustomerConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="customer"
+          p:converter-ref="batchTrainingCustomerConverter"/>
+
+    <bean id="batchTrainingCustomerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>
+                # Insert Customer Products
+                INSERT_UPDATE Customer;uid[unique=true];name[lang=en];contactEmail
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{+0};{1};{2};{S}</value>
+        </property>
+    </bean>
+
+    <bean id="batchTrainingCustomer2OrganisationConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="customer2organisation"
+          p:converter-ref="batchTrainingCustomer2OrganisationConverter"/>
+
+    <bean id="batchTrainingCustomer2OrganisationConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>
+                # Insert Customer to Organisation relation
+                INSERT_UPDATE Customer2Organisation;source(id)[unique=true];target(uid)[unique=true]
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{0};{1};{S}</value>
+        </property>
+    </bean>
+</beans>

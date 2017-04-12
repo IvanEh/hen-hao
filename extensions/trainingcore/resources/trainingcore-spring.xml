@@ -25,6 +25,7 @@
 	<import resource="classpath:/trainingcore/integration/hot-folder-store-electronics-spring.xml"/>
 	<import resource="classpath:/trainingcore/integration/hot-folder-store-apparel-spring.xml"/>
 	<import resource="classpath:/trainingcore/integration/hot-folder-common-spring.xml"/>
+	<import resource="classpath:/trainingcore/integration/hot-folder-store-training-spring.xml"/>
 
 	<!-- SystemSetup for the TrainingCore -->
 	<bean id="acceleratorCoreSystemSetup" class="com.epam.training.core.setup.CoreSystemSetup"
