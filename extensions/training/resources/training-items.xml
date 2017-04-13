@@ -33,12 +33,11 @@
 				<attribute qualifier="status" type="java.lang.Boolean">
 					<defaultvalue>false</defaultvalue>
 					<persistence type="property"/>
-					<modifiers read="true" write="false"/>
+					<modifiers read="true" write="true"/>
 				</attribute>
 				<attribute qualifier="attemptCount" type="java.lang.Integer">
-					<defaultvalue>0</defaultvalue>
 					<persistence type="property"/>
-					<modifiers read="true" write="false"/>
+					<modifiers read="true" write="true" initial="true"/>
 				</attribute>
 			</attributes>
 		</itemtype>
@@ -48,7 +47,7 @@
 			<attributes>
 				<attribute qualifier="id" type="java.lang.Integer" >
 					<persistence type="property"/>
-					<modifiers read="true"  write="false" optional="false" initial="true"/>
+					<modifiers read="true"  write="true" optional="false" initial="true"/>
 				</attribute>
 				<attribute qualifier="name" type="localized:java.lang.String">
 					<persistence type="property"/>
