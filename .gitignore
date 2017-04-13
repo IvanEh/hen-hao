@@ -1,6 +1,7 @@
 *.war
 *.ear
 *.class
+*.iml
 
 extensions/**/extensioninfo.xsd
 extensions/**/eclipsebin/
