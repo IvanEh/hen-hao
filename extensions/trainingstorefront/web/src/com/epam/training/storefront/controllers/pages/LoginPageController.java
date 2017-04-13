@@ -14,6 +14,8 @@
 package com.epam.training.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessage;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
@@ -24,7 +26,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.servicelayer.user.UserService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.stereotype.Controller;
@@ -46,6 +52,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LoginPageController extends AbstractLoginPageController
 {
 	private HttpSessionRequestCache httpSessionRequestCache;
+
+	@Autowired
+	private UserService userService;
 
 	@Override
 	protected String getView()
@@ -78,15 +87,34 @@ public class LoginPageController extends AbstractLoginPageController
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String doLogin(@RequestHeader(value = "referer", required = false) final String referer,
-			@RequestParam(value = "error", defaultValue = "false") final boolean loginError, final Model model,
+			@RequestParam(value = "error", defaultValue = "false") boolean loginError, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
 			throws CMSItemNotFoundException
 	{
 		if (!loginError)
 		{
 			storeReferer(referer, request, response);
+		} else {
+			CustomerModel customerModel = getLastCustomerModel(session);
+			if(customerModel != null && customerModel.getStatus()) {
+				GlobalMessages.addErrorMessage(model, "account.error.account.blocked");
+				loginError = false;
+			}
 		}
+
 		return getDefaultLoginPage(loginError, session, model);
+	}
+
+	private CustomerModel getLastCustomerModel(HttpSession session) {
+		CustomerModel customerModel;
+		try {
+			String username = StringUtils.lowerCase((String) session.getAttribute(SPRING_SECURITY_LAST_USERNAME));
+			customerModel = getUserService().getUserForUID(username, CustomerModel.class);
+		} catch (UnknownIdentifierException e) {
+			customerModel = null;
+		}
+
+		return customerModel;
 	}
 
 	protected void storeReferer(final String referer, final HttpServletRequest request, final HttpServletResponse response)
@@ -105,5 +133,13 @@ public class LoginPageController extends AbstractLoginPageController
 	{
 		getRegistrationValidator().validate(form, bindingResult);
 		return processRegisterUserRequest(referer, form, bindingResult, model, request, response, redirectModel);
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 }

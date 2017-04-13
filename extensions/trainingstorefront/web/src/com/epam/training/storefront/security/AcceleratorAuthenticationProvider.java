@@ -14,6 +14,7 @@
 package com.epam.training.storefront.security;
 
 import de.hybris.platform.core.Constants;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -64,8 +65,11 @@ public class AcceleratorAuthenticationProvider extends CoreAuthenticationProvide
 		{
 			try
 			{
-				final UserModel userModel = getUserService().getUserForUID(StringUtils.lowerCase(username));
+				final CustomerModel userModel = getUserService().getUserForUID(StringUtils.lowerCase(username),
+						CustomerModel.class);
+
 				userModel.setLoginDisabled(true);
+				userModel.setStatus(true);
 				getModelService().save(userModel);
 				bruteForceAttackCounter.resetUserCounter(userModel.getUid());
 			}

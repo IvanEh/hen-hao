@@ -245,10 +245,8 @@
    </bean>
 
 	<!-- Login Failure Handlers -->
-    <bean id="bruteForceAttackCounter" class="com.epam.training.storefront.security.impl.DefaultBruteForceAttackCounter">
-        <constructor-arg name="maxFailedLogins" value="5" />
-        <constructor-arg name="cacheExpiration" value="60" />
-        <constructor-arg name="cacheSizeLimit" value="1000" />
+    <bean id="bruteForceAttackCounter" class="com.epam.training.storefront.security.impl.DatabaseBruteForceAttackCounter">
+        
     </bean>
 
 	<bean id="loginAuthenticationFailureHandler" class="com.epam.training.storefront.security.LoginAuthenticationFailureHandler" >
