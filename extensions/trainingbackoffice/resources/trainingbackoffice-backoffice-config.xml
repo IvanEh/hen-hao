@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+    <context component="explorer-tree" merge-by="module">
+        <n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+            <n:navigation-node id="Training">
+                <n:type-node id="Organisations" code="Organisation" />
+            </n:navigation-node>
+        </n:explorer-tree>
+    </context>
+
+	<!--<context type="Organisations" component="listview">-->
+		<!--<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">-->
+			<!--<list:column qualifier="id"/>-->
+            <!--<list:column qualifier="name" />-->
+            <!--<list:column qualifier="email"/>-->
+            <!--<list:column qualifier="phone"/>-->
+            <!--<list:column qualifier="customerNumber"/>-->
+		<!--</list:list-view>-->
+	<!--</context>-->
+</config>

@@ -1,0 +1,5 @@
+INSERT_UPDATE  Media;code[unique=true]; catalogVersion(catalog(id),version);mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+;organisation-members_en;Default:Staged;plain/text;organisation-members_en.vm;jar:/training/templates/organisation-members_en.vm
+
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=en];content(code,catalogVersion(catalog(id),version))[lang=en];contextClass;outputMimeType;rendererType(itemtype(code),code)
+;organisation-members;Template for keep the organisation manager chief up-to-date with the information about organisation members;organisation-members_en:Default:Staged;com.epam.training.services.support.OrganisationMailContext;plain/text;RendererTypeEnum:velocity

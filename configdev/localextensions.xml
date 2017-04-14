@@ -3,5 +3,9 @@
 		<path dir='${HYBRIS_BIN_DIR}' autoload='false' />
 		<path dir='${HYBRIS_BIN_DIR}/custom' autoload='true' />
 		<extension name="hmc" />
+		<extension name="backoffice" />
+		<extension name="trainingbackoffice" />
+		<extension name="training" />
+		<extension name="solrserver" />
   </extensions>
 </hybrisconfig>

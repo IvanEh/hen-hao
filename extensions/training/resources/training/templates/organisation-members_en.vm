@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+<h1>
+    $ctx.organisation
+</h1>
+
+<table border="1">
+    <caption>Organisation members:</caption>
+    <tr>
+        <th>Name</th>
+        <th>UID</th>
+    </tr>
+    #foreach( $customer in $ctx.customers )
+    <tr>
+        <td>$customer.name</td>
+        <td>$customer.uid</td>
+    </tr>
+    #end
+</table>
+
+<hr/>
+
+Training
+
+</body>
+</html>
