@@ -30,7 +30,7 @@
 		<property name="productConverter" ref="carouselProductConverter"/>
 		<property name="cartService" ref="cartService"/>
 	</bean>
-	
+
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
 			<list merge="true">
@@ -39,7 +39,15 @@
 		</property>
 	</bean>
 
-	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter"/> 
+    <bean id="productWithAdditionalInfoConverter" parent="defaultProductConverter" name="productConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="additionalInfoPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter"/>
 	<bean id="acceleratorVariantOptionDataConverter" parent="abstractPopulatingConverter">
 		<lookup-method name="createTarget" bean="variantOptionData"/>
 		<property name="populators">
@@ -82,6 +90,8 @@
 	<bean id="apparelProductPopulator" class="com.epam.training.facades.populators.ApparelProductPopulator" >
 		<property name="genderConverter" ref="genderConverter"/>
 	</bean>
+
+	<bean id="additionalInfoPopulator" class="com.epam.training.facades.populators.AdditionalInfoPopulator"></bean>
 
 	<!-- Add the apparelProductPopulator to the productConverter -->
 	<bean parent="modifyPopulatorList">

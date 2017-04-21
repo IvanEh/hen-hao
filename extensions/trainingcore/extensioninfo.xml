@@ -16,6 +16,7 @@
 
 		<!-- you should add all required extensions to this list, except platform 
 			extensions which are automatically required -->
+		<requires-extension name="training"/>
 		<requires-extension name="acceleratorservices"/>
 		<requires-extension name="acceleratorcms"/>
 		<requires-extension name="hmc"/>

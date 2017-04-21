@@ -25,6 +25,12 @@
 			<sourceElement type="Organisation" cardinality="many" qualifier="organisations"/>
 			<targetElement type="Customer" cardinality="many" qualifier="customers"/>
 		</relation>
+
+		<relation code="Product2AdditionalInfo" localized="false">
+			<sourceElement type="Product" cardinality="one" qualifier="product"/>
+			<targetElement type="AdditionalInfo" cardinality="many" qualifier="additionalInfoList"/>
+		</relation>
+
 	</relations>
 
 	<itemtypes>
@@ -64,6 +70,16 @@
 				<attribute qualifier="customersNumber" type="java.lang.Integer">
 					<persistence type="dynamic" attributeHandler="customerNumberOrganisationAttributeHandler"/>
 					<modifiers read="true" write="false" initial="true"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="AdditionalInfo" generate="true" autocreate="true">
+			<deployment table="additionalInfo" typecode="10003"/>
+			<attributes>
+				<attribute qualifier="content" type="localized:java.lang.String">
+					<persistence type="property"/>
+					<modifiers read="true" write="true" initial="true"/>
 				</attribute>
 			</attributes>
 		</itemtype>

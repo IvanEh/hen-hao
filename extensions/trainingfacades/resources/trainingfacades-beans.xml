@@ -14,10 +14,16 @@
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="genders" type="java.util.List&lt;com.epam.training.facades.product.data.GenderData>"/>
+        <property name="additionalInfoList" type="java.util.List&lt;com.epam.training.facades.data.AdditionalInfoData>"/>
 	</bean>
+
+    <bean class="com.epam.training.facades.data.AdditionalInfoData">
+        <property name="content" type="java.lang.String"/>
+    </bean>
 
 	<bean class="com.epam.training.facades.product.data.GenderData">
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+
 </beans>

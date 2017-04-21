@@ -41,6 +41,9 @@
 
 		<!-- Add your item definitions here -->
 
+		<itemtype code="AdditionalInfoComponent" extends="CMSTabParagraphComponent" generate="true"
+				  autocreate="true" abstract="false">
+		</itemtype>
 
 		<!-- TypeGroups are for structure of this file only -->
 
