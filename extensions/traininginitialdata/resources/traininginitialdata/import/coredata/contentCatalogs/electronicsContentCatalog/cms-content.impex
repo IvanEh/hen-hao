@@ -1,0 +1,11 @@
+#
+# Import the CMS content for the site
+#
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE AdditionalInfoComponent;uid[unique=true];name;$contentCV[unique=true];
+;BasicAdditionalInfoComponent;Basic additional info component tab;;
+
+INSERT_UPDATE ElementsForContainer;source(uid, $contentCV)[unique=true];target(uid, $contentCV)[unique=true];
+;TabPanelContainer;BasicAdditionalInfoComponent;
